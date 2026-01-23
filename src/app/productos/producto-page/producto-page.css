@@ -1,0 +1,8 @@
+.contenedor-padre {
+  display: grid;
+  /*repeat(cuántas_veces, qué_tamaño)*/
+  /*auto-fill crea columnas dinámicas según el espacio disponible*/
+  /*minmax(220px, 1fr) define un tamaño mínimo de 220px y máximo de Si sobra espacio después de calcular las columnas, estírate para ocuparlo". 1fr significa "una fracción del espacio libre".*/
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}

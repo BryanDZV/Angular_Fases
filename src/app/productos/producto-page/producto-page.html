@@ -1,0 +1,9 @@
+@if (loading()) {
+  <p>Cargando productos...</p>
+} @else {
+  <div class="contenedor-padre">
+    @for (producto of productos(); track producto.id) {
+      <app-producto-card class="contenedor-padre" [producto]="producto"></app-producto-card>
+    }
+  </div>
+}
