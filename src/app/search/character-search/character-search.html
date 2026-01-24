@@ -1,6 +1,7 @@
 <label for="buscador">Buscar personaje:</label>
 <input #searchInput type="text" id="buscador" />
-@if (results().length !== 0) {
+
+@if (results().length > 0) {
   @for (character of results(); track character.id) {
     <p>{{ character.name }}</p>
   }
