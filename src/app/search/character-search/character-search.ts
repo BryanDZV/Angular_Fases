@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, inject, signal, ViewChild } from '@angular/core';
-import { debounceTime, distinctUntilChanged, fromEvent, map, switchMap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, fromEvent, map, of, switchMap } from 'rxjs';
 import { SearchService } from '../search-service';
 
 @Component({
@@ -30,7 +30,13 @@ export class CharacterSearch implements AfterViewInit {
         // Ignora valores repetidos consecutivos
         distinctUntilChanged(),
         // Cancela búsquedas previas y envía solo la más reciente
-        switchMap((term) => this.searchService.getSearchResults(term)),
+        switchMap((term) => {
+          if (term.length === 0) {
+            return of({ results: [] });
+          } else {
+            return this.searchService.getSearchResults(term);
+          }
+        }),
         // Extrae el array 'results' de la respuesta de la API
         map((response: any) => response.results ?? []),
       )
